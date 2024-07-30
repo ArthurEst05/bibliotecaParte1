@@ -8,8 +8,11 @@ public class Estudante extends Usuarios{
         super(nome, idade, sexo, telefone);
     }
 
+    public Estudante() {
+    }
+
     public Estudante(String nome, int idade, String sexo, String telefone, String instituicaoEducacional,
-            String matricula) {
+                     String matricula) {
         super(nome, idade, sexo, telefone);
         this.instituicaoEducacional = instituicaoEducacional;
         this.matricula = matricula;

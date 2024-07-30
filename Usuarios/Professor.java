@@ -4,6 +4,9 @@ public class Professor extends Usuarios{
     private String disciplina;
     private String grauAcademico;
 
+    public Professor() {
+    }
+
     public Professor(String nome, int idade, String sexo, String telefone) {
         super(nome, idade, sexo, telefone);
     }
@@ -27,6 +30,4 @@ public class Professor extends Usuarios{
         this.grauAcademico = grauAcademico;
     }
 
-    
-    
 }

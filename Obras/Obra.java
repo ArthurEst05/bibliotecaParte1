@@ -1,5 +1,8 @@
 package Obras;
-public class Obra {
+
+import Interface.DAO;
+
+public abstract class Obra {
     private String titulo;
     private String autores;
     private String area;
