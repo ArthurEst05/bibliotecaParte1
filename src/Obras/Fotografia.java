@@ -1,5 +1,10 @@
 package Obras;
-public class Fotografia extends Obra{
+
+import java.io.Serializable;
+
+public class Fotografia extends Obra implements Serializable{
+    private static final long serialVersionUID = 1L;
+
 
     public Fotografia(String titulo, String autores, String area, String ano) {
         super(titulo, autores, area, ano);

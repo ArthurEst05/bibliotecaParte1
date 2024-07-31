@@ -1,14 +1,27 @@
 package Obras;
 
-import Interface.DAO;
+import java.io.Serializable;
 
-public abstract class Obra {
+public abstract class Obra implements Serializable{
+    private static final long serialVersionUID = 1L;
+
+
+    private int id;
     private String titulo;
     private String autores;
     private String area;
     private String ano;
     
     public Obra(String titulo, String autores, String area, String ano) {
+        this.titulo = titulo;
+        this.autores = autores;
+        this.area = area;
+        this.ano = ano;
+    }
+
+    
+    public Obra(int id, String titulo, String autores, String area, String ano) {
+        this.id = id;
         this.titulo = titulo;
         this.autores = autores;
         this.area = area;
@@ -42,6 +55,14 @@ public abstract class Obra {
 
     public void visualizarObra(Obra obra){
         System.out.println("Visualizando obra");
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
     
 }

@@ -1,7 +1,11 @@
 package Usuarios;
 
-public abstract class Usuarios {
-    private int id; // Adicionado um identificador único para facilitar operações de DAO
+import java.io.Serializable;
+
+public abstract class Usuarios implements Serializable{
+    private static final long serialVersionUID = 1L;
+
+    private int id; 
     private String nome;
     private int idade;
     private String sexo;
@@ -17,7 +21,6 @@ public abstract class Usuarios {
         this.telefone = telefone;
     }
 
-    // Getters e setters para os atributos
 
     public int getId() {
         return id;
@@ -62,4 +65,5 @@ public abstract class Usuarios {
     public void lerLivro() {
         System.out.println("O usuário está lendo o livro");
     }
+
 }

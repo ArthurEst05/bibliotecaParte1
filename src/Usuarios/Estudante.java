@@ -1,6 +1,10 @@
 package Usuarios;
 
-public class Estudante extends Usuarios{
+import java.io.Serializable;
+
+public class Estudante extends Usuarios implements Serializable{
+    private static final long serialVersionUID = 1L;
+
     private String instituicaoEducacional;
     private String matricula;
 
@@ -31,5 +35,15 @@ public class Estudante extends Usuarios{
         this.matricula = matricula;
     }
 
+    @Override
+    public String toString() {
+        return "Estudante [instituicaoEducacional=" + instituicaoEducacional + ", matricula=" + matricula + ", getId()="
+                + getId() + ", getNome()=" + getNome() + ", getInstituicaoEducacional()=" + getInstituicaoEducacional()
+                + ", getIdade()=" + getIdade() + ", getSexo()=" + getSexo() + ", getMatricula()=" + getMatricula()
+                + ", getTelefone()=" + getTelefone() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
+                + ", toString()=" + super.toString() + "]";
+    }
+
+    
     
 }

@@ -1,14 +1,23 @@
-import Interface.DAO;
+package Emprest;
 import Obras.Livro;
 import Usuarios.Usuarios;
 
 public class Emprestimos {
+    private int id;
     private String dataDoEmprestimo;
     private String horaDoEmprestimo;
     private Livro livros;
     private Usuarios usuarios;
 
     
+    
+    public Emprestimos(int id, String dataDoEmprestimo, String horaDoEmprestimo, Livro livros, Usuarios usuarios) {
+        this.id = id;
+        this.dataDoEmprestimo = dataDoEmprestimo;
+        this.horaDoEmprestimo = horaDoEmprestimo;
+        this.livros = livros;
+        this.usuarios = usuarios;
+    }
     public Emprestimos(String dataDoEmprestimo, String horaDoEmprestimo, Livro livros, Usuarios usuarios) {
         this.dataDoEmprestimo = dataDoEmprestimo;
         this.horaDoEmprestimo = horaDoEmprestimo;
@@ -40,6 +49,12 @@ public class Emprestimos {
         this.usuarios = usuarios;
     }
 
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
     public void devolverLivro(Livro livro){
         livro.setEmprestimo(true);
         System.out.println("Livro devolvido");

@@ -1,55 +1,57 @@
 package ImplementDAO;
 
-import Interface.DAO;
-
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
-import Usuarios.Usuarios;
+import Interface.DAO;
+import Obras.Obra;
 
-import java.io.*;
 
-
-import static com.sun.tools.jdeprscan.DeprDB.loadFromFile;
-
-public class UsuarioDAO implements DAO<Usuarios> {
-    private static final String path = "C:\\Users\\2023101202010019\\IdeaProjects\\bibliotecaParte1\\DadosBiblioteca.txt";
-    private Map<Integer, Usuarios> database = new HashMap<>();
+public class ObraDAO implements DAO<Obra>{
+    private static final String path = "C:\\temp\\DadosBiblioteca.txt";
+    private Map<Integer, Obra> database = new HashMap<>();
     private int currentId = 0;
 
-    public UsuarioDAO() throws IOException {
+    public ObraDAO() throws IOException {
         loadFromFile();
     }
 
+
     @Override
-    public void gravar(Usuarios obj) {
+    public void gravar(Obra obj) {
         obj.setId(currentId++);
         database.put(obj.getId(), obj);
         saveToFile();
-        System.out.println("Usuário gravado: " + obj.getNome());
+        System.out.println("Obra gravada: " + obj.getTitulo());
     }
 
     @Override
-    public void excluir(Usuarios obj) {
+    public void excluir(Obra obj) {
         database.remove(obj.getId());
         saveToFile();
-        System.out.println("Usuário excluido " + obj);
+        System.out.println("Obra excluida: " + obj.getTitulo());
     }
 
     @Override
-    public void atualizar(Usuarios obj) {
+    public void atualizar(Obra obj) {
         database.put(obj.getId(), obj);
         saveToFile();
-        System.out.println("Usuario Atualizado " + obj);
+        System.out.println("Obra Atualizado " + obj);
     }
 
     @Override
-    public Usuarios ler(int id) {
+    public Obra ler(int id) {
         return database.get(id);
     }
 
-    private void saveToFile() {
+
+      private void saveToFile() {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(path))) {
             oos.writeObject(database);
         } catch (IOException e) {
@@ -64,11 +66,13 @@ public class UsuarioDAO implements DAO<Usuarios> {
             return;
         }
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(path))) {
-            database = (HashMap<Integer, Usuarios>) ois.readObject();
+            database = (HashMap<Integer, Obra>) ois.readObject();
             currentId = database.size();
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
 
+    
 }
+

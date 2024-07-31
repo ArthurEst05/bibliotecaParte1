@@ -1,5 +1,10 @@
 package Obras;
-public class Livro extends Obra{
+
+import java.io.Serializable;
+
+public class Livro extends Obra implements Serializable{
+    private static final long serialVersionUID = 1L;
+
     private String editora;
     private String edicao;
     private int numFolhas;
