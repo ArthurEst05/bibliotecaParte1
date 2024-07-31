@@ -1,6 +1,7 @@
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -18,9 +19,9 @@ import Usuarios.Professor;
 import Usuarios.Usuarios;
 
 public class Main {
-    private static final String USUARIOS_FILE = "usuarios.json";
-    private static final String LIVROS_FILE = "livros.json";
-    private static final String EMPRESTIMOS_FILE = "emprestimos.json";
+    private static final String USUARIOS_FILE = "C:\\temp\\usuarios.json";
+    private static final String LIVROS_FILE = "C:\\temp\\livros.json";
+    private static final String EMPRESTIMOS_FILE = "C:\\temp\\emprestimos.json";
 
     private static Gson gson = new Gson();
 
@@ -208,7 +209,7 @@ public class Main {
                     }
                     System.out.println("Nome do usuário: ");
                     String nomeUsuario = sc.nextLine();
-                    System.out.println("Qual o tipo de usuário que deseja fazer a realização do empréstimo: 1. Funcionario 2. Professor 3. Estudante");
+                    System.out.println("Qual o tipo de usuário que deseja realizar o empréstimo: 1. Funcionario 2. Professor 3. Estudante");
                     int tipoEmprestimoUsuario = sc.nextInt();
                     sc.nextLine();
                     Usuarios usuarioSelecionado = null;
@@ -266,9 +267,16 @@ public class Main {
     }
 
     private static <T> ArrayList<T> loadFromFile(String filename, Type type) {
+        File file = new File(filename);
+        if (!file.exists()) {
+            System.out.println("Arquivo " + filename + " não encontrado. Criando um novo arquivo.");
+            return new ArrayList<>();
+        }
+
         try (FileReader reader = new FileReader(filename)) {
             return gson.fromJson(reader, type);
         } catch (IOException e) {
+            System.out.println("Erro ao ler o arquivo " + filename + ". Criando um novo arquivo.");
             return new ArrayList<>();
         }
     }
