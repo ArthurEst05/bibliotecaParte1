@@ -1,11 +1,5 @@
 package Usuarios;
-
-import java.io.Serializable;
-
-public abstract class Usuarios implements Serializable{
-    private static final long serialVersionUID = 1L;
-
-    private int id; 
+public class Usuarios {
     private String nome;
     private int idade;
     private String sexo;
@@ -20,50 +14,33 @@ public abstract class Usuarios implements Serializable{
         this.sexo = sexo;
         this.telefone = telefone;
     }
-
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getNome() {
         return nome;
     }
-
     public void setNome(String nome) {
         this.nome = nome;
     }
-
     public int getIdade() {
         return idade;
     }
-
     public void setIdade(int idade) {
         this.idade = idade;
     }
-
     public String getSexo() {
         return sexo;
     }
-
     public void setSexo(String sexo) {
         this.sexo = sexo;
     }
-
     public String getTelefone() {
         return telefone;
     }
-
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
 
-    public void lerLivro() {
+    public void lerLivro(){
         System.out.println("O usuário está lendo o livro");
     }
-
+    
 }

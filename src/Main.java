@@ -1,14 +1,9 @@
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+<<<<<<< HEAD
+import Obras.Livro;
+=======
 import Emprest.Emprestimos;
 import ImplementDAO.ObraDAO;
 import ImplementDAO.UsuarioDAO;
@@ -18,28 +13,34 @@ import Obras.Obra;
 import Usuarios.Estudante;
 import Usuarios.Funcionario;
 import Usuarios.Professor;
+>>>>>>> a004c8d082749f70ac2cbcfbed27c1cfb5dd62f4
 import Usuarios.Usuarios;
 
 public class Main {
-    private static final String USUARIOS_FILE = "C:\\temp\\usuarios.json";
-    private static final String LIVROS_FILE = "C:\\temp\\livros.json";
-    private static final String EMPRESTIMOS_FILE = "C:\\temp\\emprestimos.json";
-
-    private static Gson gson = new Gson();
-
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+<<<<<<< HEAD
+        ArrayList<Emprestimos> emprestimos = new ArrayList<>();
+        ArrayList<Livro> livros = new ArrayList<>();
+        ArrayList<Usuarios> usuarios = new ArrayList<>();
+=======
         ArrayList<Emprestimos> emprestimos = loadFromFile(EMPRESTIMOS_FILE, new TypeToken<ArrayList<Emprestimos>>(){}.getType());
         ArrayList<Livro> livros = loadFromFile(LIVROS_FILE, new TypeToken<ArrayList<Livro>>(){}.getType());
         ArrayList<Usuarios> usuarios = loadFromFile(USUARIOS_FILE, new TypeToken<ArrayList<Usuarios>>(){}.getType());
         DAO<Usuarios> usuarioDAO = new UsuarioDAO();
         DAO<Obra> obraDao = new ObraDAO();
+>>>>>>> a004c8d082749f70ac2cbcfbed27c1cfb5dd62f4
 
-        while (true) {
+         while (true) {
             System.out.println();
             System.out.println("Escolha uma opção:");
+<<<<<<< HEAD
+            System.out.println("1. Cadastrar livro");
+            System.out.println("2. Cadastrar usuário");
+=======
             System.out.println("1. Gerenciar livro");
             System.out.println("2. Gerenciar usuário");
+>>>>>>> a004c8d082749f70ac2cbcfbed27c1cfb5dd62f4
             System.out.println("3. Realizar empréstimo");
             System.out.println("4. Realizar devolução");
             System.out.println("5. Listar todos os empréstimos");
@@ -49,6 +50,40 @@ public class Main {
 
             switch (opcao) {
                 case 1:
+<<<<<<< HEAD
+                    System.out.println("Opção 1 selecionada: Cadastrar livro");
+                    System.out.println("Qual o titulo do livro: ");
+                    String titulo = sc.nextLine();
+                    System.out.println("Qual o autor do livro: ");
+                    String autores = sc.nextLine();
+                    System.out.println("Qual a area do livro: ");
+                    String area = sc.nextLine();
+                    System.out.println("Qual a editora do livro: ");
+                    String editora = sc.nextLine();
+                    System.out.println("Qual o ano do livro: ");
+                    String ano = sc.nextLine();
+                    System.out.println("Qual a edição do livro: ");
+                    String edicao = sc.nextLine();
+                    System.out.println("Quantas folhas o tem livro: ");
+                    int numFolhas = sc.nextInt();
+                    sc.nextLine();
+                    Livro livro = new Livro(titulo, autores, area, editora, ano, edicao, numFolhas, false);
+                    livros.add(livro);
+                    break;
+                case 2:
+                    System.out.println("Opção 2 selecionada: Cadastrar usuário");
+                    System.out.println("Qual o nome do usuário: ");
+                    String nome = sc.nextLine();
+                    System.out.println("Qual a idade do usuário: ");
+                    int idade = sc.nextInt();
+                    sc.nextLine();
+                    System.out.println("Qual o sexo do usuário: ");
+                    String sexo = sc.nextLine();
+                    System.out.println("Qual o telefone do usuário: ");
+                    String telefone = sc.nextLine();
+                    Usuarios usuario = new Usuarios(nome, idade, sexo, telefone);
+                    usuarios.add(usuario);
+=======
                     System.out.println("1. Cadastrar Livro");
                     System.out.println("2. Excluir Livro");
                     System.out.println("3. Ler Livro");
@@ -238,73 +273,66 @@ public class Main {
                             System.out.println("Opção inválida.");
                             break;
                     }
+>>>>>>> a004c8d082749f70ac2cbcfbed27c1cfb5dd62f4
                     break;
 
                 case 3:
                     System.out.println("Opção 3 selecionada: Realizar empréstimo");
-                    System.out.println("Data do empréstimo: ");
+                    System.out.println("Data do emprestimo: ");
                     String dataEmprestimo = sc.nextLine();
-                    System.out.println("Hora do empréstimo: ");
+                    System.out.println("Hora do emprestimo: ");
                     String horaEmprestimo = sc.nextLine();
                     System.out.println("Nome do livro: ");
                     String tituloLivro = sc.nextLine();
-                    Livro livroSelecionado = null;
-                    for (Livro l : livros) {
-                        if (tituloLivro.equals(l.getTitulo())) {
-                            livroSelecionado = l;
-                            break;
+                    Livro livroselecionado = new Livro(null,null,null,null);
+                    for (Livro l : livros){
+                        if (tituloLivro.equals(l.getTitulo())){
+                            livroselecionado = l;
                         }
-                    }
-                    if (livroSelecionado == null) {
-                        System.out.println("Livro não encontrado.");
-                        break;
                     }
                     System.out.println("Nome do usuário: ");
                     String nomeUsuario = sc.nextLine();
+<<<<<<< HEAD
+                    Usuarios usuarioselecionado = new Usuarios();
+                    for (Usuarios u : usuarios){
+                        if(nomeUsuario.equals(u.getNome())){
+                            usuarioselecionado = u;
+=======
                     Usuarios usuarioSelecionado = null;
                     for (Usuarios u : usuarios) {
                         if (nomeUsuario.equals(u.getNome())) {
                             usuarioSelecionado = u;
                             break;
+>>>>>>> a004c8d082749f70ac2cbcfbed27c1cfb5dd62f4
                         }
                     }
-                    if (usuarioSelecionado == null) {
-                        System.out.println("Usuário não encontrado.");
-                        break;
-                    }
-                    Emprestimos emprestimo = new Emprestimos(dataEmprestimo, horaEmprestimo, livroSelecionado, usuarioSelecionado);
+                    Emprestimos emprestimo = new Emprestimos(dataEmprestimo, horaEmprestimo, livroselecionado, usuarioselecionado);
                     emprestimos.add(emprestimo);
-                    saveToFile(EMPRESTIMOS_FILE, emprestimos);
+                    
                     break;
 
                 case 4:
                     System.out.println("Opção 4 selecionada: Realizar devolução");
-                    System.out.println("Nome do livro que deseja fazer a devolução: ");
+                    System.out.println("Nome do Livro que queria fazer devolução: ");
                     tituloLivro = sc.nextLine();
                     System.out.println("Nome da pessoa que pegou emprestado: ");
                     nomeUsuario = sc.nextLine();
-                    Emprestimos emprestimoSelecionado = null;
-                    for (Emprestimos e : emprestimos) {
-                        if (tituloLivro.equals(e.getLivros().getTitulo()) && nomeUsuario.equals(e.getUsuarios().getNome())) {
-                            emprestimoSelecionado = e;
-                            break;
+                    Emprestimos emprestimosselecionado = new Emprestimos(null, null, null, null);
+                    Livro livroDevolvido = new Livro(null, null, null, null);
+                    for(Emprestimos e : emprestimos){
+                        if (tituloLivro.equals(e.getLivros().getTitulo()) && nomeUsuario.equals(e.getUsuarios().getNome())){
+                            emprestimosselecionado = e;
+                            livroDevolvido = e.getLivros();
                         }
                     }
-                    if (emprestimoSelecionado != null) {
-                        Livro livroDevolvido = emprestimoSelecionado.getLivros();
-                        emprestimoSelecionado.devolverLivro(livroDevolvido);
-                        emprestimos.remove(emprestimoSelecionado);
-                        saveToFile(EMPRESTIMOS_FILE, emprestimos);
-                        System.out.println("Devolução realizada com sucesso.");
-                    } else {
-                        System.out.println("Empréstimo não encontrado.");
-                    }
+                    emprestimosselecionado.devolverLivro(livroDevolvido);
+                    emprestimos.remove(emprestimosselecionado);
                     break;
 
                 case 5:
                     System.out.println("Opção 5 selecionada: Listar todos os empréstimos");
-                    for (Emprestimos e : emprestimos) {
-                        System.out.println("Livro: " + e.getLivros().getTitulo() + ", Usuário: " + e.getUsuarios().getNome());
+                    for(Emprestimos e : emprestimos){
+                        System.out.println("Livro: " + e.getLivros().getTitulo());
                     }
                     break;
 
@@ -317,29 +345,6 @@ public class Main {
                     System.out.println("Opção inválida. Escolha novamente.");
                     break;
             }
-        }
-    }
-
-    private static <T> ArrayList<T> loadFromFile(String filename, Type type) {
-        File file = new File(filename);
-        if (!file.exists()) {
-            System.out.println("Arquivo " + filename + " não encontrado. Criando um novo arquivo.");
-            return new ArrayList<>();
-        }
-
-        try (FileReader reader = new FileReader(filename)) {
-            return gson.fromJson(reader, type);
-        } catch (IOException e) {
-            System.out.println("Erro ao ler o arquivo " + filename + ". Criando um novo arquivo.");
-            return new ArrayList<>();
-        }
-    }
-
-    private static <T> void saveToFile(String filename, ArrayList<T> list) {
-        try (FileWriter writer = new FileWriter(filename)) {
-            gson.toJson(list, writer);
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 }

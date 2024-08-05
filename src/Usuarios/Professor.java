@@ -1,15 +1,8 @@
 package Usuarios;
 
-import java.io.Serializable;
-
-public class Professor extends Usuarios implements Serializable{
-    private static final long serialVersionUID = 1L;
-
+public class Professor extends Usuarios{
     private String disciplina;
     private String grauAcademico;
-
-    public Professor() {
-    }
 
     public Professor(String nome, int idade, String sexo, String telefone) {
         super(nome, idade, sexo, telefone);
@@ -34,15 +27,6 @@ public class Professor extends Usuarios implements Serializable{
         this.grauAcademico = grauAcademico;
     }
 
-    @Override
-    public String toString() {
-        return "Professor [disciplina=" + disciplina + ", grauAcademico=" + grauAcademico + ", getId()=" + getId()
-                + ", getNome()=" + getNome() + ", getDisciplina()=" + getDisciplina() + ", getIdade()=" + getIdade()
-                + ", getGrauAcademico()=" + getGrauAcademico() + ", getSexo()=" + getSexo() + ", getTelefone()="
-                + getTelefone() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()="
-                + super.toString() + "]";
-    }
-
     
-
+    
 }
