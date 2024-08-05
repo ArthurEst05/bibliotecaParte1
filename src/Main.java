@@ -29,12 +29,9 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         Scanner sc = new Scanner(System.in);
-        ArrayList<Emprestimos> emprestimos = loadFromFile(EMPRESTIMOS_FILE, new TypeToken<ArrayList<Emprestimos>>() {
-        }.getType());
-        ArrayList<Livro> livros = loadFromFile(LIVROS_FILE, new TypeToken<ArrayList<Livro>>() {
-        }.getType());
-        ArrayList<Usuarios> usuarios = loadFromFile(USUARIOS_FILE, new TypeToken<ArrayList<Usuarios>>() {
-        }.getType());
+        ArrayList<Emprestimos> emprestimos = loadFromFile(EMPRESTIMOS_FILE, new TypeToken<ArrayList<Emprestimos>>(){}.getType());
+        ArrayList<Livro> livros = loadFromFile(LIVROS_FILE, new TypeToken<ArrayList<Livro>>(){}.getType());
+        ArrayList<Usuarios> usuarios = loadFromFile(USUARIOS_FILE, new TypeToken<ArrayList<Usuarios>>(){}.getType());
         DAO<Usuarios> usuarioDAO = new UsuarioDAO();
         DAO<Obra> obraDao = new ObraDAO();
 
@@ -43,8 +40,10 @@ public class Main {
             System.out.println("Escolha uma opção:");
             System.out.println("1. Gerenciar livro");
             System.out.println("2. Gerenciar usuário");
-            System.out.println("3. Gerenciar emprestimos");
-            System.out.println("4. Sair");
+            System.out.println("3. Realizar empréstimo");
+            System.out.println("4. Realizar devolução");
+            System.out.println("5. Listar todos os empréstimos");
+            System.out.println("6. Sair");
             int opcao = sc.nextInt();
             sc.nextLine();
 
@@ -132,7 +131,7 @@ public class Main {
                             System.out.print("Você deseja cadastrar 1. Funcionário 2. Professor 3. Estudante: ");
                             int tipoUsuario = sc.nextInt();
                             sc.nextLine();
-
+                            
                             System.out.println("Qual o nome do usuário: ");
                             String nome = sc.nextLine();
                             System.out.println("Qual a idade do usuário: ");
@@ -242,83 +241,74 @@ public class Main {
                     break;
 
                 case 3:
-                    System.out.println("1. Realizar empréstimo");
-                    System.out.println("2. Realizar devolução");
-                    System.out.println("3. Listar todos os empréstimos");
-                    int subopcao2 = sc.nextInt();
-                    switch (subopcao2) {
-                        case 1:
-                            System.out.println("Opção 1 selecionada: Realizar empréstimo");
-                            System.out.println("Data do empréstimo: ");
-                            String dataEmprestimo = sc.nextLine();
-                            System.out.println("Hora do empréstimo: ");
-                            String horaEmprestimo = sc.nextLine();
-                            System.out.println("Nome do livro: ");
-                            String tituloLivro = sc.nextLine();
-                            Livro livroSelecionado = null;
-                            for (Livro l : livros) {
-                                if (tituloLivro.equals(l.getTitulo())) {
-                                    livroSelecionado = l;
-                                    break;
-                                }
-                            }
-                            if (livroSelecionado == null) {
-                                System.out.println("Livro não encontrado.");
-                                break;
-                            }
-                            System.out.println("Nome do usuário: ");
-                            String nomeUsuario = sc.nextLine();
-                            Usuarios usuarioSelecionado = null;
-                            for (Usuarios u : usuarios) {
-                                if (nomeUsuario.equals(u.getNome())) {
-                                    usuarioSelecionado = u;
-                                    break;
-                                }
-                            }
-                            if (usuarioSelecionado == null) {
-                                System.out.println("Usuário não encontrado.");
-                                break;
-                            }
-                            Emprestimos emprestimo = new Emprestimos(dataEmprestimo, horaEmprestimo, livroSelecionado,
-                                    usuarioSelecionado);
-                            emprestimos.add(emprestimo);
-                            saveToFile(EMPRESTIMOS_FILE, emprestimos);
+                    System.out.println("Opção 3 selecionada: Realizar empréstimo");
+                    System.out.println("Data do empréstimo: ");
+                    String dataEmprestimo = sc.nextLine();
+                    System.out.println("Hora do empréstimo: ");
+                    String horaEmprestimo = sc.nextLine();
+                    System.out.println("Nome do livro: ");
+                    String tituloLivro = sc.nextLine();
+                    Livro livroSelecionado = null;
+                    for (Livro l : livros) {
+                        if (tituloLivro.equals(l.getTitulo())) {
+                            livroSelecionado = l;
                             break;
-                        case 2:
-                            System.out.println("Opção 4 selecionada: Realizar devolução");
-                            System.out.println("Nome do livro que deseja fazer a devolução: ");
-                            tituloLivro = sc.nextLine();
-                            System.out.println("Nome da pessoa que pegou emprestado: ");
-                            nomeUsuario = sc.nextLine();
-                            Emprestimos emprestimoSelecionado = null;
-                            for (Emprestimos e : emprestimos) {
-                                if (tituloLivro.equals(e.getLivros().getTitulo())
-                                        && nomeUsuario.equals(e.getUsuarios().getNome())) {
-                                    emprestimoSelecionado = e;
-                                    break;
-                                }
-                            }
-                            if (emprestimoSelecionado != null) {
-                                Livro livroDevolvido = emprestimoSelecionado.getLivros();
-                                emprestimoSelecionado.devolverLivro(livroDevolvido);
-                                emprestimos.remove(emprestimoSelecionado);
-                                saveToFile(EMPRESTIMOS_FILE, emprestimos);
-                                System.out.println("Devolução realizada com sucesso.");
-                            } else {
-                                System.out.println("Empréstimo não encontrado.");
-                            }
-                            break;
-                        case 3:
-
-                            System.out.println("Opção 5 selecionada: Listar todos os empréstimos");
-                            for (Emprestimos e : emprestimos) {
-                                System.out.println("Livro: " + e.getLivros().getTitulo() + ", Usuário: "
-                                        + e.getUsuarios().getNome());
-                            }
-                            break;
+                        }
                     }
+                    if (livroSelecionado == null) {
+                        System.out.println("Livro não encontrado.");
+                        break;
+                    }
+                    System.out.println("Nome do usuário: ");
+                    String nomeUsuario = sc.nextLine();
+                    Usuarios usuarioSelecionado = null;
+                    for (Usuarios u : usuarios) {
+                        if (nomeUsuario.equals(u.getNome())) {
+                            usuarioSelecionado = u;
+                            break;
+                        }
+                    }
+                    if (usuarioSelecionado == null) {
+                        System.out.println("Usuário não encontrado.");
+                        break;
+                    }
+                    Emprestimos emprestimo = new Emprestimos(dataEmprestimo, horaEmprestimo, livroSelecionado, usuarioSelecionado);
+                    emprestimos.add(emprestimo);
+                    saveToFile(EMPRESTIMOS_FILE, emprestimos);
+                    break;
 
                 case 4:
+                    System.out.println("Opção 4 selecionada: Realizar devolução");
+                    System.out.println("Nome do livro que deseja fazer a devolução: ");
+                    tituloLivro = sc.nextLine();
+                    System.out.println("Nome da pessoa que pegou emprestado: ");
+                    nomeUsuario = sc.nextLine();
+                    Emprestimos emprestimoSelecionado = null;
+                    for (Emprestimos e : emprestimos) {
+                        if (tituloLivro.equals(e.getLivros().getTitulo()) && nomeUsuario.equals(e.getUsuarios().getNome())) {
+                            emprestimoSelecionado = e;
+                            break;
+                        }
+                    }
+                    if (emprestimoSelecionado != null) {
+                        Livro livroDevolvido = emprestimoSelecionado.getLivros();
+                        emprestimoSelecionado.devolverLivro(livroDevolvido);
+                        emprestimos.remove(emprestimoSelecionado);
+                        saveToFile(EMPRESTIMOS_FILE, emprestimos);
+                        System.out.println("Devolução realizada com sucesso.");
+                    } else {
+                        System.out.println("Empréstimo não encontrado.");
+                    }
+                    break;
+
+                case 5:
+                    System.out.println("Opção 5 selecionada: Listar todos os empréstimos");
+                    for (Emprestimos e : emprestimos) {
+                        System.out.println("Livro: " + e.getLivros().getTitulo() + ", Usuário: " + e.getUsuarios().getNome());
+                    }
+                    break;
+
+                case 6:
                     sc.close();
                     System.exit(0);
                     break;
